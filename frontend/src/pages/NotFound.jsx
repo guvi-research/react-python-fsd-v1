@@ -10,6 +10,13 @@ export default function NotFound() {
           Sorry, we couldn't find the page you're looking for.
         </p>
         <div className="mt-6">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-full px-3 py-2 border rounded mb-4"
+            // You can add onChange handler if you want to implement search
+            disabled
+          />
           <Link
             to="/"
             className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
@@ -20,4 +27,4 @@ export default function NotFound() {
       </div>
     </div>
   );
-} 
+}
