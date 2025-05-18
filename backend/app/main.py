@@ -4,6 +4,10 @@ from .middleware.logging import LoggingMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
+from fastapi.responses import JSONResponse
+from fastapi.requests import Request
+from fastapi.exception_handlers import RequestValidationError
+from fastapi.exceptions import RequestValidationError
 
 # Load environment variables
 load_dotenv()
@@ -34,4 +38,24 @@ def read_root():
         "message": "Hello World from FastAPI!",
         "app_name": os.getenv("APP_NAME", "FastAPI Backend"),
         "version": os.getenv("API_VERSION", "v1")
-    } 
+    }
+
+@app.exception_handler(404)
+async def not_found_handler(request: Request, exc):
+    return JSONResponse(
+        status_code=404,
+        content={"detail": "Resource not found"}
+    )
+
+@app.get("/meta")
+def api_meta():
+    return {
+        "app_name": os.getenv("APP_NAME", "FastAPI Backend"),
+        "version": os.getenv("API_VERSION", "v1"),
+        "environment": os.getenv("ENVIRONMENT", "development"),
+        "routes": [route.path for route in app.routes]
+    }
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}

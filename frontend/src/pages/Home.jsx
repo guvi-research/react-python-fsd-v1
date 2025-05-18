@@ -5,6 +5,7 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [backendStatus, setBackendStatus] = useState(null);
   const [error, setError] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
   // Get the current hostname and port from the browser
   const currentUrl = window.location.origin;
 
@@ -22,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+    <div className={darkMode ? "min-h-screen bg-gray-900 text-white" : "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50"}>
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Main Content */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -66,6 +67,7 @@ export default function Home() {
               <div className="bg-blue-50 p-4 rounded-md">
                 <p className="mb-2 text-gray-800">Run your frontend development server:</p>
                 <div className="bg-gray-800 text-gray-100 p-2 rounded-md overflow-x-auto">
+                  
                   <code>make run-local</code>
                 </div>
               </div>
@@ -137,6 +139,12 @@ export default function Home() {
           <p className="text-gray-500 mt-2">Start building your amazing frontend application!</p>
         </div>
       </div>
+      <button
+        className="absolute top-4 right-4 px-4 py-2 bg-gray-800 text-white rounded"
+        onClick={() => setDarkMode(!darkMode)}
+      >
+        {darkMode ? "Light Mode" : "Dark Mode"}
+      </button>
     </div>
   );
-} 
+}
