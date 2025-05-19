@@ -71,7 +71,7 @@ Note: `.env` files are not tracked in Git for security reasons. Make sure to:
 
 ### Clone Your Fork
 ```bash
-git clone https://github.com/guvi-research/react-python-fsd-v1.git
+git clone https://github.com/Shraddha2105.git cd forked-repo
 cd react-python-fsd-v1
 ```
 
